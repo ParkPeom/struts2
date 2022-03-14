@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!-- Mapper -->
+<sqlMap namespace="member">
+
+
+<!-- 회원가입 -->
+<insert id="insertData" parameterClass="com.join.MemberDTO">
+
+	insert into mem (userId,userPwd,userName,userBirth,userTel)
+	values (#userId#,#userPwd#,#userName#,#userBirth#,#userTel#)
+
+</insert>
+
+
+<!-- 회원정보찾기 -->
+<select id="getld" resultClass="com.join.MemberDTO">
+
+	select userId,userPwd,userName,to_char(userBirth,'yyyy-mm-dd') userBirth,userTel
+	from mem where userId=#userId#
+
+</select>
+
+<!-- 로그인 -->
+<select id="getReadData" resultClass="com.join.MemberDTO">
+	
+	select userId,userPwd,userName,to_char(userBirth,'yyyy-mm-dd') userBirth,userTel
+	from mem where userId=#userId# and userPwd=#userPwd#
+
+</select>
+
+<!-- 비밀번호 찾기 -->
+<select id="getPwd" resultClass="com.join.MemberDTO">
+
+	select userId,userPwd,userName,to_char(userBirth,'yyyy-mm-dd') userBirth,userTel
+	from mem where userId=#userId# and userTel=#userTel#
+	
+</select>
+
+</sqlMap>

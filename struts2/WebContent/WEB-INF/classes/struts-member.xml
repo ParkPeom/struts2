@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts 
+PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+<package name="member" extends="struts-default" namespace="/mem">
+
+	<!-- 회원가입 -->
+	<action name="created" method="created" class="com.join.MemberAction">
+		<result name="input">/member/created.jsp</result>
+		<!-- 작성완료 시 반환값이 success -->
+		<result name="success" type="redirectAction">login</result>
+	</action>
+	
+	<!-- 로그인 -->
+	<action name="login" method="login" class="com.join.MemberAction">
+		<result name="input">/member/login.jsp</result>
+		<interceptor-ref name="prepare"/>
+		<interceptor-ref name="modelDriven"/>
+		<interceptor-ref name="params"/>
+		
+		<result name="success" type="chain">
+		<param name="actionName">list</param>
+		<param name="namespace">/img</param>
+		</result>
+	</action>
+	
+	<!-- 로그아웃 -->
+	<action name="logout" method="logout" class="com.join.MemberAction">
+		<result name="success" type="redirectAction">login</result>
+	</action>
+	
+	<!-- 비밀번호찾기 -->
+	<action name="searchpw" method="searchpw" class="com.join.MemberAction">
+		<result name="input">/member/searchpw.jsp</result>
+	</action>
+
+</package>
+
+</struts>

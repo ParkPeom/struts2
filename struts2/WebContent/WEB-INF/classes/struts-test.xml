@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts
+PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!--  struts-test.xml 은 분배기 같은 역할이다 mvc 에서 controll 역할이다. -->
+
+
+<!-- name : 이 패키지의 고유 이름 (호출해서쓰진않음 내맘대로 써주면됨)  -->
+<!-- 패키지는 여러개 만들수있고 name이라는 곳에 고유이름을 써주면 됨 -->
+
+<!--  namespace : /itwill 주소로 들어오면 struts-test.xml로 들어와라 -->
+<!-- 사용자 주소를 내가 여기다가 써줄수있다. -->
+
+
+<!-- action name : wirte.action 생략되어있음  -->
+
+<!--  struts2/itwill/wirte.action 으로 오게됨
+		result 로 진짜 주소로 이동하게됨  -->
+		
+<!-- class 이동:  TestAction 를 거쳤다가  execute는 무조건실행되는 메소드에 실행된다음 return SUCESS를 가지고온다. -->		
+
+
+<!--  extends 는 struts.xml에 default 맞춰줘야한다. -->
+<!--  새롭게 추가 test2 method="created" 는 String created() 로  -->
+
+<struts>
+
+<package name="test" extends="default" namespace="/itwill">
+
+	<action name="write">
+		<result>/test/write.jsp</result>
+	</action>
+
+	<action name="write_ok" class="com.test.TestAction">
+		<result name="success">/test/view.jsp</result>
+	</action>
+	
+	<action name="created">
+		<result>/test1/created.jsp</result>
+	</action>
+
+	<action name="created_ok" class="com.test1.TestAction">
+		<result name="ok">/test1/result.jsp</result>
+	</action>
+</package>
+
+<package name="test2" extends="default" namespace="/modelDri">
+	<action name="write" class="com.test2.TestAction" method="created">
+		<result name="input">/test2/write.jsp</result>
+		<result name="success">/test2/view.jsp</result>
+		
+	</action> 
+
+</package>
+
+</struts>

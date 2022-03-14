@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config
+PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+"http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<!-- 각각의 기능에 대한 환경설정  -->
+<struts-config>
+	
+	<!-- 객체생성 TestForm 을 testForm이라는 객체로 생성 데이터3개가들어감  -->
+	<form-beans>
+		<form-bean name="testForm" type="com.test.TestForm"/>
+	</form-beans>
+	
+	<action-mappings>
+		<!--  test.do .do생략되어짐  -->
+		<!--  /test_ok" 세개의데이터를 가지고 TestAction으로 가라  -->	
+		<!--  testAction으로 testForm의 3개의 데이터를 가지고 넘어갈 -->
+		<!--  가져온 ok ,error 값에 따라 이동  -->
+		<!--  이동시키게 하는것이 map이라고 한다. -->
+		<action path="/test" forward="/test/write.jsp"/>
+		<action path="/test_ok" type="com.test.TestAction"
+		name="testForm" scope="request">
+			
+			<forward name="ok" path="/test/write_ok.jsp"/>
+			<forward name="error" path="/test/error.jsp"/>
+		</action>
+	</action-mappings>	
+</struts-config>

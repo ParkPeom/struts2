@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts
+PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!--  Controller 역할  -->
+<!--  extends 의 default 는 packagename 의 default   struts.xml과 연결되게끔함 -->
+<!--  주소창을 여기서 친다 -->
+<struts>
+
+	<package name="board" extends="default" namespace="/bbs">
+		
+		<!-- /bbs에 created.Action 이 오면  BoardAction 으로 가서 created메소드를 실행해라 -->
+		<action name="created" class="com.board.BoardAction" method="created">
+			<result name="input">/board/created.jsp</result>
+			<!-- 입력이 됬으므로 리다이랙트(수정,세션된건) -->
+			<result name="success" type="redirectAction">list</result>
+		</action>
+	
+		<action name="list" class="com.board.BoardAction" method="list">
+			<result name="success">/board/list.jsp</result>
+		</action>
+		
+		<action name="article" class="com.board.BoardAction" method="article">
+			<result name="success">/board/article.jsp</result>
+		</action>
+			
+		<!-- struts2 에서는 list뒤에 get방식으로 데이터를 넘길수있다. -->	
+		<action name="updated" class="com.board.BoardAction" method="updated">
+			<result name="input">/board/created.jsp</result>
+			<result name="success" type="redirectAction">list?pageNum=${dto.pageNum}</result>
+		</action>	
+			
+		
+		<action name="reply" class="com.board.BoardAction" method="reply">
+			<result name="input">/board/created.jsp</result>
+			<result name="success" type="redirectAction">list?pageNum=${dto.pageNum}</result>
+		</action>
+		
+		<action name="deleted" class="com.board.BoardAction" method="deleted">
+			<result name="success" type="redirectAction">list?pageNum=${dto.pageNum}</result>
+		</action>		
+	</package>
+</struts>
